@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1280">
+    <title>31 Ngày, 1 Người + AI - Tony @ Next Level Builder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Mega:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* --- CORE SETUP: FIXED SLIDE MODE --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        :root { 
+            --bg-color: #f2f2f2; 
+            --accent-yellow: #fff500; 
+            --accent-pink: #ff00ff; 
+            --accent-blue: #00ffff; 
+            --accent-green: #00ff00; 
+            --accent-black: #000000;
+            --accent-purple: #9D4EDD;
+            --border-thickness: 4px; 
+        }
+        
+        body { 
+            background-color: #222; 
+            font-family: 'Space Mono', monospace; 
+            margin: 0; 
+            padding: 40px 0;
+            display: flex; 
+            flex-direction: column; 
+            align-items: center;
+        }
+
+        /* --- SLIDE CONTAINER (FIXED 1280x720) --- */
+        .slide-container {
+            width: 1280px; 
+            height: 720px;
+            background-color: var(--bg-color);
+            border: var(--border-thickness) solid var(--accent-black);
+            box-shadow: 12px 12px 0px var(--accent-black);
+            position: relative; 
+            overflow: hidden; 
+            padding: 60px 70px;
+            margin-bottom: 60px;
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center;
+        }
+
+        /* --- MANDATORY HEADER --- */
+        .slide-header {
+            position: absolute; 
+            top: 0; 
+            left: 0;
+            background: var(--accent-black); 
+            color: var(--accent-yellow);
+            padding: 8px 20px; 
+            font-family: 'Lexend Mega', sans-serif; 
+            font-size: 12px; 
+            font-weight: 700;
+            border-bottom: 4px solid var(--accent-pink); 
+            border-right: 4px solid var(--accent-pink);
+            z-index: 100; 
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- SLIDE NUMBER --- */
+        .slide-number {
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            font-family: 'Lexend Mega', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: rgba(0,0,0,0.3);
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3, h4 { 
+            font-family: 'Lexend Mega', sans-serif; 
+            text-transform: uppercase; 
+            color: #000; 
+            margin: 0;
+            line-height: 0.95;
+        }
+        
+        h1 { 
+            font-size: 72px; 
+            font-weight: 900; 
+            text-shadow: 5px 5px 0px var(--accent-pink); 
+        }
+        
+        h1.mega {
+            font-size: 90px;
+        }
+        
+        h2 { 
+            font-size: 48px; 
+            font-weight: 900;
+        }
+        
+        h3 {
+            font-size: 36px;
+            font-weight: 700;
+        }
+
+        p, li {
+            font-size: 22px;
+            line-height: 1.5;
+            font-weight: 500;
+        }
+
+        /* --- COMPONENTS --- */
+        .neo-box { 
+            background: white; 
+            border: 4px solid black; 
+            padding: 25px 30px; 
+            box-shadow: 8px 8px 0px black; 
+        }
+
+        .highlight-box {
+            background: var(--accent-yellow);
+            border: 4px solid black;
+            padding: 15px 25px;
+            display: inline-block;
+            box-shadow: 6px 6px 0px black;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .tag {
+            background: var(--accent-black);
+            color: white;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 700;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .tag.pink { background: var(--accent-pink); color: white; }
+        .tag.blue { background: var(--accent-blue); color: black; }
+        .tag.green { background: var(--accent-green); color: black; }
+        .tag.yellow { background: var(--accent-yellow); color: black; }
+        .tag.purple { background: var(--accent-purple); color: white; }
+
+        /* --- AVATAR --- */
+        .avatar {
+            width: 200px;
+            height: 200px;
+            border: 4px solid black;
+            box-shadow: 8px 8px 0px var(--accent-pink);
+            object-fit: cover;
+        }
+
+        .avatar-small {
+            width: 120px;
+            height: 120px;
+            border: 4px solid black;
+            box-shadow: 6px 6px 0px var(--accent-blue);
+            object-fit: cover;
+            filter: grayscale(100%);
+        }
+
+        .avatar-small:hover {
+            filter: grayscale(0%);
+        }
+
+        /* --- LISTS --- */
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        ul li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-pink);
+            font-weight: bold;
+        }
+
+        /* --- GRID LAYOUTS --- */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+        }
+
+        .flex-center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .flex-col {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* --- UTILITIES --- */
+        .rotate-1 { transform: rotate(1deg); }
+        .rotate-neg-1 { transform: rotate(-1deg); }
+        .rotate-2 { transform: rotate(2deg); }
+        .rotate-neg-2 { transform: rotate(-2deg); }
+
+        .text-center { text-align: center; }
+        .text-pink { color: var(--accent-pink); }
+        .text-yellow { color: var(--accent-yellow); }
+        .text-muted { color: rgba(0,0,0,0.5); }
+
+        .mt-20 { margin-top: 20px; }
+        .mt-30 { margin-top: 30px; }
+        .mt-40 { margin-top: 40px; }
+        .mb-20 { margin-bottom: 20px; }
+        .mb-30 { margin-bottom: 30px; }
+
+        .full-height {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* --- SPECIAL SLIDES --- */
+        .title-slide {
+            text-align: center;
+        }
+
+        .title-slide h1 {
+            margin-bottom: 20px;
+        }
+
+        .title-slide .subtitle {
+            font-size: 24px;
+            max-width: 800px;
+            margin: 0 auto;
+            margin-top: 30px;
+        }
+
+        /* Quote box */
+        .quote-box {
+            background: var(--accent-black);
+            color: white;
+            padding: 40px;
+            border: 4px solid var(--accent-pink);
+            position: relative;
+        }
+
+        .quote-box::before {
+            content: '"';
+            font-family: 'Lexend Mega', sans-serif;
+            font-size: 120px;
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            color: var(--accent-pink);
+            opacity: 0.3;
+            line-height: 1;
+        }
+
+        .quote-box p {
+            font-size: 28px;
+            font-style: italic;
+        }
+
+        /* Comparison table */
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .compare-table th,
+        .compare-table td {
+            padding: 15px 20px;
+            border: 3px solid black;
+            text-align: left;
+            font-size: 20px;
+        }
+
+        .compare-table th {
+            background: var(--accent-black);
+            color: white;
+            font-family: 'Lexend Mega', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .compare-table tr:nth-child(even) td {
+            background: white;
+        }
+
+        /* Keyword highlight */
+        .keyword {
+            background: var(--accent-yellow);
+            padding: 5px 15px;
+            border: 3px solid black;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        /* Icon circle */
+        .icon-circle {
+            width: 80px;
+            height: 80px;
+            background: var(--accent-yellow);
+            border: 4px solid black;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            box-shadow: 5px 5px 0px black;
+        }
+
+        /* Checklist */
+        .checklist li::before {
+            content: '☐';
+            color: var(--accent-black);
+        }
+
+        .checklist li.checked::before {
+            content: '☑';
+            color: var(--accent-green);
+        }
+
+        /* Flow arrow */
+        .flow-arrow {
+            font-size: 36px;
+            color: var(--accent-pink);
+        }
+
+        /* Break slide */
+        .break-slide {
+            background: var(--accent-purple);
+        }
+
+        .break-slide h1 {
+            color: white;
+            text-shadow: 5px 5px 0px black;
+        }
+
+        .break-slide p {
+            color: rgba(255,255,255,0.9);
+        }
+
+        /* Dark slide */
+        .dark-slide {
+            background: var(--accent-black);
+        }
+
+        .dark-slide h1, .dark-slide h2, .dark-slide h3, .dark-slide p, .dark-slide li {
+            color: white;
+        }
+
+        .dark-slide h1 {
+            text-shadow: 5px 5px 0px var(--accent-pink);
+        }
+
+        .dark-slide .slide-number {
+            color: rgba(255,255,255,0.3);
+        }
+
+        /* Tactic card */
+        .tactic-card {
+            background: white;
+            border: 4px solid black;
+            padding: 30px;
+            box-shadow: 8px 8px 0px black;
+        }
+
+        .tactic-card h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .tactic-card p {
+            font-size: 18px;
+            color: rgba(0,0,0,0.7);
+        }
+
+        /* Number badge */
+        .num-badge {
+            width: 60px;
+            height: 60px;
+            background: var(--accent-pink);
+            border: 4px solid black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Lexend Mega', sans-serif;
+            font-size: 28px;
+            font-weight: 900;
+            box-shadow: 4px 4px 0px black;
+        }
+
+        /* Section label */
+        .section-label {
+            position: absolute;
+            top: 0;
+            right: 100px;
+            background: var(--accent-pink);
+            color: white;
+            padding: 8px 20px;
+            font-family: 'Lexend Mega', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            border-bottom: 4px solid black;
+            border-left: 4px solid black;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ==================== SLIDE 1: TITLE ==================== -->
+<div class="slide-container title-slide">
+    <div class="slide-header">Tony's Friends Community | tony@vibery.app</div>
+    
+    <div class="flex-center" style="margin-bottom: 30px;">
+        <img src="https://uploads.aigency.asia/ab6b3ca8-5607-432b-8d33-a96775eac710.jpeg" alt="Tony" class="avatar rotate-neg-2">
+    </div>
+    
+    <h1 class="mega">31 NGÀY</h1>
+    <h2 style="margin-top: 10px; text-shadow: none;">1 NGƯỜI + AI</h2>
+    
+    <p class="subtitle">Hành trình build hệ thống bán sản phẩm số & cộng đồng</p>
+    
+    <div class="slide-number">01</div>
+</div>
+
+<!-- ==================== SLIDE 2: EXPECTATION VS REALITY ==================== -->
+<div class="slide-container">
+    <div class="slide-header">Tony's Friends Community | tony@vibery.app</div>
+    
+    <div class="text-center full-height">
+        <p style="font-size: 28px; margin-bottom: 40px;">Bạn expect sẽ gặp...</p>
+        
+        <div class="flex-center" style="margin-bottom: 50px;">
+            <div class="flex-col" style="align-items: center;">
+                <div style="width: 100px; height: 100px; background: #333; border: 4px solid black; display: flex; align-items: center; justify-content: center; opacity: 0.5;">
+                    <span style="font-size: 40px;">🦾</span>
+                </div>
+                <p style="font-size: 16px; margin-top: 10px; opacity: 0.5;">Tony Stark</p>
+            </div>
+            <p style="font-size: 24px; opacity: 0.5;">hoặc</p>
+            <div class="flex-col" style="align-items: center;">
+                <div style="width: 100px; height: 100px; background: #333; border: 4px solid black; display: flex; align-items: center; justify-content: center; opacity: 0.5;">
+                    <span style="font-size: 40px;">📸</span>
+                </div>
+                <p style="font-size: 16px; margin-top: 10px; opacity: 0.5;">Tony Dinh</p>
+            </div>
+        </div>
+        
+        <h2 style="font-size: 36px; margin-bottom: 30px;">NHƯNG THẬT ĐÁNG TIẾC...</h2>
+        
+        <div class="flex-center">
+            <img src="https://uploads.aigency.asia/ab6b3ca8-5607-432b-8d33-a96775eac710.jpeg" alt="Tony" class="avatar rotate-2" style="width: 180px; height: 180px;">
+        </div>
+        
+        <p style="font-size: 24px; margin-top: 20px;">Chỉ có <span class="keyword">TÔI</span> ở đây 😅</p>
+    </div>
+    
+    <div class="slide-number">02</div>
+</div>
+
+<!-- ==================== SLIDE 3: HÔM NAY TÔI NÓI ==================== -->
+<div class="slide-container">
+    <div class="slide-header">Tony's Friends Community | tony@vibery.app</div>
+    
+    <h2 class="mb-30">HÔM NAY TÔI NÓI</h2>
+    
+    <div class="grid-2" style="margin-top: 40px;">
+        <div>
+            <div class="flex-center" style="justify-content: flex-start; gap: 20px; margin-bottom: 40px;">
+                <span class="highlight-box rotate-neg-1">CÁCH NGHĨ</span>
+                <span class="flow-arrow">→</span>
+                <span class="highlight-box rotate-1">CÁCH LÀM</span>
+                <span class="flow-arrow">→</span>
+                <span class="highlight-box rotate-neg-1">CÁCH KHÔNG BỊ AI "NUỐT"</span>
+            </div>
+        </div>
+        
+        <div class="neo-box rotate-1">
+            <h3 style="font-size: 24px; margin-bottom: 20px;">THU HOẠCH HÔM NAY</h3>
+            <ul style="font-size: 24px;">
+                <li style="padding: 15px 0; padding-left: 35px;">Case study thật</li>
+                <li style="padding: 15px 0; padding-left: 35px;">Tactics FB</li>
+                <li style="padding: 15px 0; padding-left: 35px;">Góc nhìn mới về AI</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="slide-number">03</div>
+</div>
+
+<!-- ==================== SLIDE 4: THE WHY ==================== -->
+<div class="slide-container">
+    <div class="slide-header">Tony's Friends Community | tony@vibery.app</div>
+    <div class="section-label">PART 1: STRATEGY</div>
+    
+    <h2 class="mb-30">TẠI SAO VIBERY EDU?</h2>
+    
+    <div class="grid-3" style="margin-top: 30px;">
+        <div class="neo-box rotate-neg-1" style="text-align: center;">
+            <div class="icon-circle" style="margin: 0 auto 20px;">😤</div>
+            <h3 style="font-size: 20px; margin-bottom: 15px;">PROBLEM</h3>
+            <p style="font-size: 16px;">Nhu cầu customize resource theo ý mình</p>
+        </div>
+        
+        <div class="neo-box rotate-1" style="text-align: center; background: var(--accent-yellow);">
+            <div class="icon-circle" style="margin: 0 auto 20px; background: white;">🔍</div>
+            <h3 style="font-size: 20px; margin-bottom: 15px;">GAP</h3>
+            <p style="font-size: 16px;">Giải pháp hiện tại không fill được</p>
+        </div>
+        
+        <div class="neo-box rotate-neg-1" style="text-align: center;">
+            <div class="icon-circle" style="margin: 0 auto 20px; background: var(--accent-green);">💡</div>
+            <h3 style="font-size: 20px; margin-bottom: 15px;">OPPORTUNITY</h3>
+            <p style="font-size: 16px;">Build cho chính mình trước</p>
+        </div>
+    </div>
+    
+    <div class="slide-number">04</div>
+</div>
+
+<!-- ==================== SLIDE 5: VIBE BUILDING FRAMEWORK ==================== -->
+<div class="slide-container">
+    <div class="slide-header">Tony's Friends Community | tony@vibery.app</div>
+    <div class="section-label">PART 1: STRATEGY</div>
+    
+    <div class="grid-2">
+        <div>
+            <span class="tag yellow" style="margin-bottom: 20px; display: inline-block;">KEYWORD</span>
+            <h1 style="font-size: 64px; text-shadow: 4px 4px 0px var(--accent-blue);">VIBE BUILDING</h1>
+            <p class="mt-30" style="font-size: 24px;">Product nuôi Community<br>Community nuôi Product</p>
+        </div>
+        
+        <div class="neo-box rotate-1" style="padding: 40px; text-align: center;">
+            <div style="font-size: 20px; display: flex; flex-direction: column; gap: 15px; align-items: center;">
+                <span class="highlight-box" style="font-size: 18px;">CONTENT</span>
+                <span style="font-size: 24px;">↓</span>
+                <span class="highlight-box" style="font-size: 18px; background: var(--accent-blue);">TRUST</span>
+                <span style="font-size: 24px;">↓</span>
+                <span class="highlight-box" style="font-size: 18px; background: var(--accent-pink); color: white;">PRODUCT</span>
+                <span style="font-size: 24px;">↓</span>
+                <span class="highlight-box" style="font-size: 18px; background: var(--accent-green);">COMMUNITY</span>
+                <span style="font-size: 24px;">↻</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="slide-number">05</div>
+</div>
+
+<!-- ==================== SLIDE 6: 31 NGÀY LÀM ĐƯỢC GÌ ==================== -->
+<div class="slide-container">
+    <div class="slide-header">Tony's Friends Community | tony@vibery.app</div>
+    <div class="section-label">PART 1: STRATEGY</div>
+    
+    <h2 class="mb-30">31 NGÀY LÀM ĐƯỢC GÌ?</h2>
+    
+    <div class="grid-2" style="margin-top: 20px;">
+        <div class="neo-box">
+            <h3 style="font-size: 24px; margin-bottom: 20px; color: var(--accent-green);">✓ BUILT</h3>
+            <ul style="font-size: 20px;">
+                <li>Hệ thống membership</li>
+                <li>Course platform</li>
+                <li>Community features</li>
+                <li>Payment integration</li>
+                <li>Content delivery</li>
+            </ul>
+        </div>
+        
+        <div class="neo-box rotate-1" style="background: #fff0f0;">
+            <h3 style="font-size: 24px; margin-bottom: 20px; color: var(--accent-pink);">✗ SKIPPED</h3>
+            <ul style="font-size: 20px;">
+                <li>Perfect UI polish</li>
+                <li>Edge case handling</li>
+                <li>Nice-to-have features</li>
+                <li>Over-engineering</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="highlight-box rotate-neg-1" style="margin-top: 30px;">
+        CONSTRAINT-DRIVEN DECISIONS
+    </div>
+    
+    <div class="slide-number">06</div>
+</div>
+
+<!-- ==================== SLIDE 7: NÓI YES VỚI GÌ ==================== -->
+<div class="slide-container">
+    <div class="slide-header">Tony's Friends Community | tony@vibery.app</div>
+    <div class="section-label">PART 1: STRATEGY</div>
+    
+    <h2 class="mb-30">NÓI <span style="background: var(--accent-green); padding: 0 15px;">YES</span> VỚI GÌ?</h2>
+    
+    <div class="flex-col" style="gap: 25px; margin-top: 30px;">
+        <div class="neo-box" style="display: flex; align-items: center; gap: 25px;">
+            <div class="num-badge" style="background: var(--accent-green);">1</div>
+            <div>
+                <h3 style="font-size: 24px; margin-bottom: 8px;">CORE FEATURES ONLY</h3>
+                <p style="font-size: 18px; color: rgba(0,0,0,0.6);">Làm đủ để ship, không làm đẹp</p>
+            </div>
+        </div>
+        
+        <div class="neo-box rotate-1" style="display: flex; align-items: center; gap: 25px;">
+            <div class="num-badge" style="background: var(--accent-green);">2</div>
+            <div>
+                <h3 style="font-size: 24px; margin-bottom: 8px;">AI-FIRST DEVELOPMENT</h3>
+                <p style="font-size: 18px; color: rgba(0,0,0,0.6);">Claude làm heavy lifting, tôi review</p>
+            </div>
+        </div>
+        
+        <div class="neo-box rotate-neg-1" style="display: flex; align-items: center; gap: 25px;">
+            <div class="num-badge" style="background: var(--accent-green);">3</div>
+            <div>
+                <h3 style="font-size: 24px; margin-bottom: 8px;">SHIP EARLY, FIX LATER</h3>
+                <p style="font-size: 18px; color: rgba(0,0,0,0.6);">Real users > Giả định</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="slide-number">07</div>
+</div>
+
+<!-- ==================== SLIDE 8: NÓI NO VỚI GÌ ==================== -->
+<div class="slide-container">
+    <div class="slide-header">Tony's Friends Community | tony@vibery.app</div>
+    <div class="section-label">PART 1: STRATEGY</div>
+    
+    <h2 class="mb-30">NÓI <span style="background: var(--accent-pink); color: white; padding: 0 15px;">NO</span> VỚI GÌ?</h2>
+    
+    <div class="flex-col" style="gap: 25px; margin-top: 30px;">
+        <div class="neo-box" style="display: flex; align-items: center; gap: 25px; background: #fff0f0;">
+            <div class="num-badge">✗</div>
+            <div>
+                <h3 style="font-size: 24px; margin-bottom: 8px;">FEATURE CREEP</h3>
+                <p style="font-size: 18px; color: rgba(0,0,0,0.6);">"Thêm cái này hay quá!" → NO</p>
+            </div>
+        </div>
+        
+        <div class="neo-box rotate-1" style="display: flex; align-items: center; gap: 25px; background: #fff0f0;">
+            <div class="num-badge">✗</div>
+            <div>
+                <h3 style="font-size: 24px; margin-bottom: 8px;">PREMATURE OPTIMIZATION</h3>
+                <p style="font-size: 18px; color: rgba(0,0,0,0.6);">Scale problem khi chưa có user → NO</p>
+            </div>
+        </div>
+        
+        <div class="neo-box rotate-neg-1" style="display: flex; align-items: center; gap: 25px; background: #fff0f0;">
+            <div class="num-badge">✗</div>
+            <div>
+                <h3 style="font-size: 24px; margin-bottom: 8px;">PERFECT BEFORE LAUNCH</h3>
+                <p style="font-size: 18px; color: rgba(0,0,0,0.6);">80% done > 100% never</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="highlight-box rotate-1" style="margin-top: 30px; background: var(--accent-pink); color: white;">
+        CONSTRAINT-DRIVEN BUILDING
+    </div>
+    
+    <div class="slide-number">08</div>
+</div>
+
+<!-- ==================== SLIDE 9: FB TACTICS - THE HOOK ==================== -->
+<div class="slide-container dark-slide">
+    <div class="slide-header">Tony's Friends Community | tony@vibery.app</div>
+    <div class="section-label" style="background: var(--accent-yellow); color: black;">PART 2: MARKETING</div>
+    
+    <div class="text-center full-height">
+        <p style="font-size: 28px; margin-bottom: 30px; opacity: 0.7;">Từ người hướng nội</p>
+        <h2 style="font-size: 42px; color: rgba(255,255,255,0.5); margin-bottom: 20px;">POST MẤY THỨ<br>KHÔNG AI HIỂU</h2>
+        
+        <div style="font-size: 60px; margin: 30px 0;">↓</div>
+        
+        <h1 style="font-size: 56px;">POST MÀ<br>BÁN ĐƯỢC SẢN PHẨM</h1>
+    </div>
+    
+    <div class="slide-number">09</div>
+</div>
+
+<!-- ==================== SLIDE 10: MINDSET SHIFT ==================== -->
+<div class="slide-container">
+    <div class="slide-header">Tony's Friends Community | tony@vibery.app</div>
+    <div class="section-label" style="background: var(--accent-yellow); color: black;">PART 2: MARKETING</div>
+    
+    <h2 class="mb-30">MINDSET SHIFT</h2>
+    
+    <div class="quote-box rotate-neg-1" style="margin-top: 30px;">
+        <p>Không phải "học marketing"</p>
+    </div>
+    
+    <div style="display: flex; gap: 20px; margin-top: 40px; align-items: center;">
+        <span class="flow-arrow" style="font-size: 48px;">→</span>
+        <div class="neo-box rotate-1" style="flex: 1; background: var(--accent-yellow);">
+            <p style="font-size: 24px; margin-bottom: 15px;"><strong>Thích gì đăng đó</strong></p>
+            <p style="font-size: 24px; margin-bottom: 15px;"><strong>Chỉ cần nói dễ hiểu cho TA</strong></p>
+            <p style="font-size: 24px;"><strong>AI hỗ trợ sau</strong></p>
+        </div>
+    </div>
+    
+    <div class="highlight-box" style="margin-top: 30px;">
+        KEYWORD: CHẤT TRƯỚC, AI SAU
+    </div>
+    
+    <div class="slide-number">10</div>
+</div>
+
+<!-- ==================== SLIDE 11: TACTIC 1 ==================== -->
+<div class="slide-container">
+    <div class="slide-header">Tony's Friends Community | tony@vibery.app</div>
+    <div class="section-label" style="background: var(--accent-yellow); color: black;">PART 2: MARKETING</div>
+    
+    <div class="grid-2">
+        <div>
+            <span class="tag pink" style="margin-bottom: 20px; display: inline-block;">TACTIC #1</span>
+            <h1 style="font-size: 52px; text-shadow: 4px 4px 0px var(--accent-yellow);">CHẤT TRƯỚC<br>AI SAU</h1>
+        </div>
+        
+        <div class="tactic-card rotate-1">
+            <ul style="font-size: 22px;">
+                <li style="padding: 15px 0; padding-left: 35px;">Thời AI, chất của bạn là USP</li>
+                <li style="padding: 15px 0; padding-left: 35px;">Tự do thể hiện, không cần perfect</li>
+                <li style="padding: 15px 0; padding-left: 35px;">AI polish sau, không AI nghĩ hộ</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="slide-number">11</div>
+</div>
+
+<!-- ==================== SLIDE 12: TACTIC 2 ==================== -->
+<div class="slide-container">
+    <div class="slide-header">Tony's Friends Community | tony@vibery.app</div>
+    <div class="section-label" style="background: var(--accent-yellow); color: black;">PART 2: MARKETING</div>
+    
+    <div class="grid-2">
+        <div>
+            <span class="tag blue" style="margin-bottom: 20px; display: inline-block;">TACTIC #2</span>
+            <h1 style="font-size: 52px; text-shadow: 4px 4px 0px var(--accent-blue);">SHOW,<br>DON'T TELL</h1>
+        </div>
+        
+        <div class="tactic-card rotate-neg-1">
+            <ul style="font-size: 22px;">
+                <li style="padding: 15px 0; padding-left: 35px;">Share demo thật, tài nguyên thật</li>
+                <li style="padding: 15px 0; padding-left: 35px;">Proof > Promise</li>
+                <li style="padding: 15px 0; padding-left: 35px;">Người ta tin những gì họ thấy</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="slide-number">12</div>
+</div>
+
+<!-- ==================== SLIDE 13: TACTIC 3 ==================== -->
+<div class="slide-container">
+    <div class="slide-header">Tony's Friends Community | tony@vibery.app</div>
+    <div class="section-label" style="background: var(--accent-yellow); color: black;">PART 2: MARKETING</div>
+    
+    <div class="grid-2">
+        <div>
+            <span class="tag green" style="margin-bottom: 20px; display: inline-block;">TACTIC #3</span>
+            <h1 style="font-size: 48px; text-shadow: 4px 4px 0px var(--accent-green);">BẢN CHẤT<br>> BỀ MẶT</h1>
+        </div>
+        
+        <div class="tactic-card rotate-1">
+            <ul style="font-size: 22px;">
+                <li style="padding: 15px 0; padding-left: 35px;">Share kiến thức sâu, không tips nông</li>
+                <li style="padding: 15px 0; padding-left: 35px;">Differentiator với AI-generated content</li>
+                <li style="padding: 15px 0; padding-left: 35px;">Audience cần depth, không cần noise</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="slide-number">13</div>
+</div>
+
+<!-- ==================== SLIDE 14: KHI NÀO DÙNG GÌ ==================== -->
+<div class="slide-container">
+    <div class="slide-header">Tony's Friends Community | tony@vibery.app</div>
+    <div class="section-label" style="background: var(--accent-yellow); color: black;">PART 2: MARKETING</div>
+    
+    <h2 class="mb-30">KHI NÀO DÙNG CÁI GÌ?</h2>
+    
+    <table class="compare-table" style="margin-top: 20px;">
+        <tr>
+            <th style="width: 30%;">TACTIC</th>
+            <th style="width: 35%;">KHI NÀO</th>
+            <th style="width: 35%;">MỤC ĐÍCH</th>
+        </tr>
+        <tr>
+            <td><span class="keyword" style="font-size: 14px;">Chất trước, AI sau</span></td>
+            <td>Daily content</td>
+            <td>Build voice & trust</td>
+        </tr>
+        <tr>
+            <td><span class="keyword" style="font-size: 14px; background: var(--accent-blue);">Show, Don't Tell</span></td>
+            <td>Launch / Milestone</td>
+            <td>Proof & credibility</td>
+        </tr>
+        <tr>
+            <td><span class="keyword" style="font-size: 14px; background: var(--accent-green);">Bản chất > Bề mặt</span></td>
+            <td>Educational content</td>
+            <td>Authority & depth</td>
+        </tr>
+    </table>
+    
+    <p class="mt-30 text-center" style="font-size: 20px; opacity: 0.7;">Context matters — không phải tactic nào cũng fit mọi lúc</p>
+    
+    <div class="slide-number">14</div>
+</div>
+
+<!-- ==================== SLIDE 15: BREAK ==================== -->
+<div class="slide-container break-slide">
+    <div class="slide-header">Tony's Friends Community | tony@vibery.app</div>
+    
+    <div class="text-center full-height">
+        <h1 style="font-size: 80px;">☕ BREAK</h1>
+        <p style="font-size: 28px; margin-top: 40px;">5 phút nghỉ — quay lại với phần hay nhất</p>
+        
+        <div class="neo-box" style="margin-top: 50px; display: inline-block; background: rgba(255,255,255,0.95);">
+            <p style="font-size: 22px; color: black;">💭 Nghĩ thử: Bạn đang dùng AI như thế nào trong workflow?</p>
+        </div>
+    </div>
+    
+    <div class="slide-number">15</div>
+</div>
+
+<!-- ==================== SLIDE 16: PHILOSOPHY ==================== -->
+<div class="slide-container">
+    <div class="slide-header">Tony's Friends Community | tony@vibery.app</div>
+    <div class="section-label" style="background: var(--accent-purple);">PART 3: AI WORKFLOW</div>
+    
+    <h2 class="mb-30">PHILOSOPHY TRƯỚC</h2>
+    
+    <div class="quote-box" style="margin-top: 30px;">
+        <p style="font-size: 36px;">"AI là tool, bạn là director"</p>
+    </div>
+    
+    <div class="grid-2" style="margin-top: 40px;">
+        <div class="neo-box rotate-neg-1" style="text-align: center; background: #f0fff0;">
+            <h3 style="font-size: 22px; margin-bottom: 10px;">✓ ĐÚNG</h3>
+            <p style="font-size: 18px;">AI như collaborator</p>
+        </div>
+        
+        <div class="neo-box rotate-1" style="text-align: center; background: #fff0f0;">
+            <h3 style="font-size: 22px; margin-bottom: 10px;">✗ SAI</h3>
+            <p style="font-size: 18px;">AI như magic button</p>
+        </div>
+    </div>
+    
+    <div class="slide-number">16</div>
+</div>
+
+<!-- ==================== SLIDE 17: CLAUDE PROJECTS CONCEPT ==================== -->
+<div class="slide-container">
+    <div class="slide-header">Tony's Friends Community | tony@vibery.app</div>
+    <div class="section-label" style="background: var(--accent-purple);">PART 3: AI WORKFLOW</div>
+    
+    <h2 class="mb-30">CLAUDE PROJECTS</h2>
+    
+    <div class="grid-2" style="margin-top: 20px;">
+        <div>
+            <p style="font-size: 24px; margin-bottom: 30px;">"AI assistant có <span class="keyword">memory</span> và <span class="keyword">context</span>"</p>
+            
+            <div class="neo-box rotate-neg-1">
+                <h3 style="font-size: 20px; margin-bottom: 15px;">TẠI SAO KHÁC CHAT THƯỜNG?</h3>
+                <ul style="font-size: 18px;">
+                    <li>Không cần repeat context</li>
+                    <li>Consistent behavior</li>
+                    <li>Specialized workflows</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="text-center">
+            <div class="highlight-box" style="font-size: 32px; padding: 30px 40px; transform: rotate(2deg);">
+                CONTEXT IS<br>EVERYTHING
+            </div>
+        </div>
+    </div>
+    
+    <div class="slide-number">17</div>
+</div>
+
+<!-- ==================== SLIDE 18: ANATOMY OF MASTER PROMPT ==================== -->
+<div class="slide-container">
+    <div class="slide-header">Tony's Friends Community | tony@vibery.app</div>
+    <div class="section-label" style="background: var(--accent-purple);">PART 3: AI WORKFLOW</div>
+    
+    <h2 class="mb-30">ANATOMY OF A MASTER PROMPT</h2>
+    
+    <div class="grid-3" style="margin-top: 20px;">
+        <div class="neo-box rotate-neg-1" style="padding: 20px;">
+            <div class="num-badge" style="margin-bottom: 15px; background: var(--accent-yellow);">1</div>
+            <h3 style="font-size: 18px;">ROLE & IDENTITY</h3>
+            <p style="font-size: 14px; margin-top: 10px; opacity: 0.7;">AI là ai trong project này?</p>
+        </div>
+        
+        <div class="neo-box rotate-1" style="padding: 20px;">
+            <div class="num-badge" style="margin-bottom: 15px; background: var(--accent-blue);">2</div>
+            <h3 style="font-size: 18px;">KNOWLEDGE BASE</h3>
+            <p style="font-size: 14px; margin-top: 10px; opacity: 0.7;">Documents & context</p>
+        </div>
+        
+        <div class="neo-box rotate-neg-1" style="padding: 20px;">
+            <div class="num-badge" style="margin-bottom: 15px; background: var(--accent-green);">3</div>
+            <h3 style="font-size: 18px;">WORKFLOW</h3>
+            <p style="font-size: 14px; margin-top: 10px; opacity: 0.7;">Steps & process</p>
+        </div>
+        
+        <div class="neo-box rotate-1" style="padding: 20px;">
+            <div class="num-badge" style="margin-bottom: 15px; background: var(--accent-pink);">4</div>
+            <h3 style="font-size: 18px;">OUTPUT FORMAT</h3>
+            <p style="font-size: 14px; margin-top: 10px; opacity: 0.7;">Deliverables structure</p>
+        </div>
+        
+        <div class="neo-box rotate-neg-1" style="padding: 20px;">
+            <div class="num-badge" style="margin-bottom: 15px; background: var(--accent-purple);">5</div>
+            <h3 style="font-size: 18px;">CONSTRAINTS</h3>
+            <p style="font-size: 14px; margin-top: 10px; opacity: 0.7;">Rules & boundaries</p>
+        </div>
+        
+        <div class="neo-box rotate-1" style="padding: 20px; background: var(--accent-yellow);">
+            <div class="num-badge" style="margin-bottom: 15px; background: white;">✓</div>
+            <h3 style="font-size: 18px;">RESULT</h3>
+            <p style="font-size: 14px; margin-top: 10px;">Consistent, quality output</p>
+        </div>
+    </div>
+    
+    <div class="slide-number">18</div>
+</div>
+
+<!-- ==================== SLIDE 19: DEMO 1 - PROMPT MASTER ==================== -->
+<div class="slide-container dark-slide">
+    <div class="slide-header">Tony's Friends Community | tony@vibery.app</div>
+    <div class="section-label" style="background: var(--accent-purple);">PART 3: AI WORKFLOW</div>
+    
+    <div class="text-center full-height">
+        <span class="tag yellow" style="margin-bottom: 30px;">DEMO #1</span>
+        
+        <h1 style="font-size: 64px;">PROMPT MASTER</h1>
+        
+        <p style="font-size: 24px; margin-top: 40px; max-width: 700px; margin-left: auto; margin-right: auto;">
+            Project chế <span style="color: var(--accent-yellow);">master prompt</span> cho các Claude Projects khác
+        </p>
+        
+        <div class="neo-box" style="margin-top: 40px; display: inline-block; background: white;">
+            <p style="font-size: 20px; color: black;">🤯 META: Project này → tạo Event Manager → tạo slide này</p>
+        </div>
+    </div>
+    
+    <div class="slide-number">19</div>
+</div>
+
+<!-- ==================== SLIDE 20: DEMO 2 - EVENT MANAGER ==================== -->
+<div class="slide-container dark-slide">
+    <div class="slide-header">Tony's Friends Community | tony@vibery.app</div>
+    <div class="section-label" style="background: var(--accent-purple);">PART 3: AI WORKFLOW</div>
+    
+    <div class="text-center full-height">
+        <span class="tag pink" style="margin-bottom: 30px;">DEMO #2</span>
+        
+        <h1 style="font-size: 64px;">EVENT MANAGER</h1>
+        
+        <p style="font-size: 24px; margin-top: 40px; max-width: 700px; margin-left: auto; margin-right: auto;">
+            Chuẩn bị event có hệ thống:<br>
+            Brief → Strategy → Slides → Landing page
+        </p>
+        
+        <div class="neo-box" style="margin-top: 40px; display: inline-block; background: var(--accent-yellow);">
+            <p style="font-size: 20px; color: black;">📍 Chính project này đang tạo ra cái slide bạn đang xem</p>
+        </div>
+    </div>
+    
+    <div class="slide-number">20</div>
+</div>
+
+<!-- ==================== SLIDE 21: USE CASES KHÁC ==================== -->
+<div class="slide-container">
+    <div class="slide-header">Tony's Friends Community | tony@vibery.app</div>
+    <div class="section-label" style="background: var(--accent-purple);">PART 3: AI WORKFLOW</div>
+    
+    <h2 class="mb-30">CÁC USE CASES KHÁC</h2>
+    
+    <div class="grid-3" style="margin-top: 30px;">
+        <div class="neo-box rotate-neg-1" style="text-align: center; padding: 25px;">
+            <div style="font-size: 48px; margin-bottom: 15px;">📝</div>
+            <h3 style="font-size: 18px;">CONTENT WRITER</h3>
+            <p style="font-size: 14px; margin-top: 10px; opacity: 0.7;">Blog, social, docs</p>
+        </div>
+        
+        <div class="neo-box rotate-1" style="text-align: center; padding: 25px;">
+            <div style="font-size: 48px; margin-bottom: 15px;">💻</div>
+            <h3 style="font-size: 18px;">CODE REVIEWER</h3>
+            <p style="font-size: 14px; margin-top: 10px; opacity: 0.7;">PR review, refactor</p>
+        </div>
+        
+        <div class="neo-box rotate-neg-1" style="text-align: center; padding: 25px;">
+            <div style="font-size: 48px; margin-bottom: 15px;">🎨</div>
+            <h3 style="font-size: 18px;">DESIGN BRIEF</h3>
+            <p style="font-size: 14px; margin-top: 10px; opacity: 0.7;">UI specs, wireframes</p>
+        </div>
+        
+        <div class="neo-box rotate-1" style="text-align: center; padding: 25px;">
+            <div style="font-size: 48px; margin-bottom: 15px;">📊</div>
+            <h3 style="font-size: 18px;">DATA ANALYST</h3>
+            <p style="font-size: 14px; margin-top: 10px; opacity: 0.7;">Reports, insights</p>
+        </div>
+        
+        <div class="neo-box rotate-neg-1" style="text-align: center; padding: 25px;">
+            <div style="font-size: 48px; margin-bottom: 15px;">🤝</div>
+            <h3 style="font-size: 18px;">CUSTOMER SUPPORT</h3>
+            <p style="font-size: 14px; margin-top: 10px; opacity: 0.7;">Replies, FAQs</p>
+        </div>
+        
+        <div class="neo-box rotate-1" style="text-align: center; padding: 25px; background: var(--accent-yellow);">
+            <div style="font-size: 48px; margin-bottom: 15px;">🚀</div>
+            <h3 style="font-size: 18px;">YOUR IDEA?</h3>
+            <p style="font-size: 14px; margin-top: 10px;">Bạn sẽ build gì?</p>
+        </div>
+    </div>
+    
+    <div class="slide-number">21</div>
+</div>
+
+<!-- ==================== SLIDE 22: ELEPHANT IN THE ROOM ==================== -->
+<div class="slide-container dark-slide">
+    <div class="slide-header">Tony's Friends Community | tony@vibery.app</div>
+    <div class="section-label" style="background: var(--accent-pink);">PART 4: AI AUTONOMY</div>
+    
+    <div class="text-center full-height">
+        <p style="font-size: 28px; margin-bottom: 30px; opacity: 0.7;">The elephant in the room...</p>
+        
+        <h1 style="font-size: 56px;">CÓ BỊ<br>PHỤ THUỘC AI<br>KHÔNG?</h1>
+        
+        <p style="font-size: 24px; margin-top: 50px; opacity: 0.8;">Đây là câu hỏi đúng để hỏi.</p>
+    </div>
+    
+    <div class="slide-number">22</div>
+</div>
+
+<!-- ==================== SLIDE 23: UPSIDE / DOWNSIDE ==================== -->
+<div class="slide-container">
+    <div class="slide-header">Tony's Friends Community | tony@vibery.app</div>
+    <div class="section-label" style="background: var(--accent-pink);">PART 4: AI AUTONOMY</div>
+    
+    <h2 class="mb-30">HONEST TAKE</h2>
+    
+    <div class="grid-2" style="margin-top: 20px;">
+        <div class="neo-box" style="background: #f0fff0;">
+            <h3 style="font-size: 24px; margin-bottom: 20px; color: var(--accent-green);">✓ ĐƯỢC GÌ</h3>
+            <ul style="font-size: 20px;">
+                <li style="padding: 12px 0; padding-left: 35px;"><strong>Speed</strong> — ship nhanh hơn</li>
+                <li style="padding: 12px 0; padding-left: 35px;"><strong>Scope</strong> — làm được nhiều hơn</li>
+                <li style="padding: 12px 0; padding-left: 35px;"><strong>Quality</strong> — output consistent</li>
+            </ul>
+        </div>
+        
+        <div class="neo-box rotate-1" style="background: #fff0f0;">
+            <h3 style="font-size: 24px; margin-bottom: 20px; color: var(--accent-pink);">⚠ RISK GÌ</h3>
+            <ul style="font-size: 20px;">
+                <li style="padding: 12px 0; padding-left: 35px;">Mất quá trình "vật lộn" để hiểu sâu</li>
+                <li style="padding: 12px 0; padding-left: 35px;">Dễ accept câu trả lời đầu tiên</li>
+                <li style="padding: 12px 0; padding-left: 35px;">Tư duy có thể trở nên lazy</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="slide-number">23</div>
+</div>
+
+<!-- ==================== SLIDE 24: 3 THỨ AI KHÔNG LÀM ĐƯỢC ==================== -->
+<div class="slide-container">
+    <div class="slide-header">Tony's Friends Community | tony@vibery.app</div>
+    <div class="section-label" style="background: var(--accent-pink);">PART 4: AI AUTONOMY</div>
+    
+    <h2 class="mb-20">3 THỨ AI KHÔNG LÀM ĐƯỢC</h2>
+    
+    <div class="flex-col" style="gap: 20px; margin-top: 20px;">
+        <div class="neo-box" style="display: flex; gap: 25px; align-items: flex-start;">
+            <div class="num-badge" style="flex-shrink: 0;">1</div>
+            <div>
+                <h3 style="font-size: 24px; margin-bottom: 8px;">ĐẶT CÂU HỎI TỪ HƯ KHÔNG</h3>
+                <p style="font-size: 18px; opacity: 0.7;">AI trả lời câu hỏi, không thức dậy 3h sáng vì thắc mắc</p>
+            </div>
+        </div>
+        
+        <div class="neo-box rotate-1" style="display: flex; gap: 25px; align-items: flex-start;">
+            <div class="num-badge" style="flex-shrink: 0;">2</div>
+            <div>
+                <h3 style="font-size: 24px; margin-bottom: 8px;">CHỊU TRÁCH NHIỆM</h3>
+                <p style="font-size: 18px; opacity: 0.7;">AI đưa gợi ý, không chịu hậu quả. Người ký quyết định vẫn phải là con người.</p>
+            </div>
+        </div>
+        
+        <div class="neo-box rotate-neg-1" style="display: flex; gap: 25px; align-items: flex-start;">
+            <div class="num-badge" style="flex-shrink: 0;">3</div>
+            <div>
+                <h3 style="font-size: 24px; margin-bottom: 8px;">QUAN TÂM THỰC SỰ</h3>
+                <p style="font-size: 18px; opacity: 0.7;">AI không có cái mất. Tư duy sâu đến từ việc thực sự care.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="slide-number">24</div>
+</div>
+
+<!-- ==================== SLIDE 25: CÂU HỎI ĐÚNG ==================== -->
+<div class="slide-container dark-slide">
+    <div class="slide-header">Tony's Friends Community | tony@vibery.app</div>
+    <div class="section-label" style="background: var(--accent-pink);">PART 4: AI AUTONOMY</div>
+    
+    <div class="full-height" style="justify-content: center;">
+        <div style="margin-bottom: 50px;">
+            <p style="font-size: 24px; opacity: 0.5; margin-bottom: 15px;">❌ Câu hỏi sai:</p>
+            <h3 style="font-size: 32px; opacity: 0.5;">"AI có thay thế tư duy con người không?"</h3>
+        </div>
+        
+        <div>
+            <p style="font-size: 24px; color: var(--accent-yellow); margin-bottom: 15px;">✓ Câu hỏi đúng:</p>
+            <h1 style="font-size: 52px;">"TÔI CÓ CÒN<br>MUỐN TƯ DUY KHÔNG?"</h1>
+        </div>
+        
+        <div class="grid-2" style="margin-top: 50px; max-width: 800px;">
+            <div class="neo-box" style="background: var(--accent-green); text-align: center;">
+                <p style="font-size: 18px; color: black;"><strong>Nếu CÓ</strong> → AI là công cụ tuyệt vời</p>
+            </div>
+            <div class="neo-box" style="background: var(--accent-pink); text-align: center;">
+                <p style="font-size: 18px; color: white;"><strong>Nếu KHÔNG</strong> → Không phải lỗi AI</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="slide-number">25</div>
+</div>
+
+<!-- ==================== SLIDE 26: GIỮ TỰ CHỦ CHECKLIST ==================== -->
+<div class="slide-container">
+    <div class="slide-header">Tony's Friends Community | tony@vibery.app</div>
+    <div class="section-label" style="background: var(--accent-pink);">PART 4: AI AUTONOMY</div>
+    
+    <h2 class="mb-30">GIỮ TỰ CHỦ — CHECKLIST</h2>
+    
+    <div class="neo-box" style="margin-top: 20px; padding: 35px;">
+        <ul class="checklist" style="font-size: 22px;">
+            <li style="padding: 18px 0; padding-left: 40px;">Tôi có thể giải thích <strong>TẠI SAO</strong> chọn output này?</li>
+            <li style="padding: 18px 0; padding-left: 40px;">Tôi đã <strong>challenge AI</strong> ít nhất 1 lần?</li>
+            <li style="padding: 18px 0; padding-left: 40px;">Output này reflect thinking <strong>CỦA TÔI</strong> hay của AI?</li>
+            <li style="padding: 18px 0; padding-left: 40px;">Nếu không có AI, tôi vẫn <strong>biết hướng đi</strong>?</li>
+        </ul>
+    </div>
+    
+    <div class="highlight-box rotate-1" style="margin-top: 30px; font-size: 18px;">
+        KEYWORD: AI AMPLIFIES, NOT REPLACES THINKING
+    </div>
+    
+    <div class="slide-number">26</div>
+</div>
+
+<!-- ==================== SLIDE 27: RECAP ==================== -->
+<div class="slide-container" style="background: var(--accent-yellow);">
+    <div class="slide-header">Tony's Friends Community | tony@vibery.app</div>
+    
+    <h2 class="mb-30 text-center">3 KEYWORDS</h2>
+    
+    <div class="grid-3" style="margin-top: 30px;">
+        <div class="neo-box rotate-neg-2" style="text-align: center; padding: 35px;">
+            <h3 style="font-size: 28px; margin-bottom: 15px;">GIÁ TRỊ THẬT</h3>
+            <p style="font-size: 16px;">Build thứ người ta thực sự cần, không phải trend</p>
+        </div>
+        
+        <div class="neo-box rotate-1" style="text-align: center; padding: 35px; background: var(--accent-pink); color: white;">
+            <h3 style="font-size: 28px; margin-bottom: 15px; color: white;">NGHIÊN CỨU SÂU</h3>
+            <p style="font-size: 16px;">Hiểu bản chất, không chỉ bề mặt</p>
+        </div>
+        
+        <div class="neo-box rotate-neg-1" style="text-align: center; padding: 35px;">
+            <h3 style="font-size: 28px; margin-bottom: 15px;">ỨNG DỤNG SỚM</h3>
+            <p style="font-size: 16px;">Ship first, optimize later</p>
+        </div>
+    </div>
+    
+    <div class="slide-number" style="color: rgba(0,0,0,0.3);">27</div>
+</div>
+
+<!-- ==================== SLIDE 28: WHERE TO CONNECT ==================== -->
+<div class="slide-container">
+    <div class="slide-header">Tony's Friends Community | tony@vibery.app</div>
+    
+    <div class="grid-2">
+        <div>
+            <h2 class="mb-30">CONNECT</h2>
+            <p style="font-size: 22px; margin-bottom: 30px;">Nếu muốn xem thêm hành trình...</p>
+            
+            <div class="flex-col" style="gap: 15px;">
+                <div class="neo-box" style="display: flex; align-items: center; gap: 15px; padding: 15px 20px;">
+                    <span style="font-size: 24px;">🌐</span>
+                    <span style="font-size: 18px;">vibery.edu</span>
+                </div>
+                <div class="neo-box rotate-1" style="display: flex; align-items: center; gap: 15px; padding: 15px 20px;">
+                    <span style="font-size: 24px;">📧</span>
+                    <span style="font-size: 18px;">tony@vibery.app</span>
+                </div>
+                <div class="neo-box rotate-neg-1" style="display: flex; align-items: center; gap: 15px; padding: 15px 20px;">
+                    <span style="font-size: 24px;">👥</span>
+                    <span style="font-size: 18px;">Tony's Friends Community</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center">
+            <img src="https://uploads.aigency.asia/ab6b3ca8-5607-432b-8d33-a96775eac710.jpeg" alt="Tony" class="avatar rotate-2" style="width: 250px; height: 250px;">
+            <p style="font-size: 18px; margin-top: 20px; opacity: 0.7;">Không phải Tony Stark, nhưng cũng ship được 😉</p>
+        </div>
+    </div>
+    
+    <div class="slide-number">28</div>
+</div>
+
+<!-- ==================== SLIDE 29: Q&A ==================== -->
+<div class="slide-container dark-slide">
+    <div class="slide-header">Tony's Friends Community | tony@vibery.app</div>
+    
+    <div class="text-center full-height">
+        <h1 class="mega" style="font-size: 120px;">Q&A</h1>
+        
+        <p style="font-size: 24px; margin-top: 50px; opacity: 0.7;">Hỏi gì cũng được — trừ "thời tiết hôm nay thế nào" 😄</p>
+        
+        <div class="grid-3" style="margin-top: 50px; max-width: 900px; margin-left: auto; margin-right: auto;">
+            <div class="neo-box" style="padding: 15px; text-align: center;">
+                <p style="font-size: 14px; color: black;">"Tech stack nào?"</p>
+            </div>
+            <div class="neo-box" style="padding: 15px; text-align: center; background: var(--accent-yellow);">
+                <p style="font-size: 14px; color: black;">"Balance build vs market?"</p>
+            </div>
+            <div class="neo-box" style="padding: 15px; text-align: center;">
+                <p style="font-size: 14px; color: black;">"Claude Projects limit?"</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="slide-number">29</div>
+</div>
+
+</body>
+</html>
