@@ -425,6 +425,42 @@
             border-bottom: 4px solid black;
             border-left: 4px solid black;
         }
+
+        /* Flip Card */
+        .flip-card {
+            cursor: pointer;
+            perspective: 1000px;
+            height: 320px;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front,
+        .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+
+        .flip-card-back {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-back ul li::before {
+            color: white !important;
+        }
     </style>
 </head>
 <body>
@@ -588,19 +624,37 @@
             </ul>
         </div>
         
-        <div class="neo-box rotate-1" style="background: #fff0f0;">
-            <h3 style="font-size: 24px; margin-bottom: 20px; color: var(--accent-pink);">✗ SKIPPED</h3>
-            <ul style="font-size: 20px;">
-                <li>Perfect UI polish</li>
-                <li>Edge case handling</li>
-                <li>Nice-to-have features</li>
-                <li>Over-engineering</li>
-            </ul>
+        <!-- Flip card for SKIPPED reveal -->
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+                <!-- Front: SKIPPED -->
+                <div class="flip-card-front neo-box rotate-1" style="background: #fff0f0;">
+                    <h3 style="font-size: 24px; margin-bottom: 20px; color: var(--accent-pink);">✗ SKIPPED</h3>
+                    <ul style="font-size: 20px;">
+                        <li>Perfect UI polish</li>
+                        <li>Edge case handling</li>
+                        <li>Nice-to-have features</li>
+                        <li>Over-engineering</li>
+                    </ul>
+                    <p style="font-size: 12px; margin-top: 20px; opacity: 0.5; text-align: center;">👆 Click để xem sự thật</p>
+                </div>
+                <!-- Back: THE TRUTH -->
+                <div class="flip-card-back neo-box" style="background: var(--accent-pink);">
+                    <h3 style="font-size: 24px; margin-bottom: 20px; color: white;">🤦 SỰ THẬT</h3>
+                    <ul style="font-size: 20px; color: white;">
+                        <li style="color: white;">Perfect UI polish ✓</li>
+                        <li style="color: white;">Edge case handling ✓</li>
+                        <li style="color: white;">Nice-to-have features ✓</li>
+                        <li style="color: white;"><strong>OVER-ENGINEERED</strong> ✓✓✓</li>
+                    </ul>
+                    <p style="font-size: 14px; margin-top: 15px; color: rgba(255,255,255,0.9); text-align: center;">Đừng như tôi 😅</p>
+                </div>
+            </div>
         </div>
     </div>
     
     <div class="highlight-box rotate-neg-1" style="margin-top: 30px;">
-        CONSTRAINT-DRIVEN DECISIONS
+        CONSTRAINT-DRIVEN DECISIONS <span style="font-size: 14px; opacity: 0.6;">(mà tôi không follow)</span>
     </div>
     
     <div class="slide-number">06</div>
@@ -1196,72 +1250,4 @@
         </div>
         
         <div class="neo-box rotate-neg-1" style="text-align: center; padding: 35px;">
-            <h3 style="font-size: 28px; margin-bottom: 15px;">ỨNG DỤNG SỚM</h3>
-            <p style="font-size: 16px;">Ship first, optimize later</p>
-        </div>
-    </div>
-    
-    <div class="slide-number" style="color: rgba(0,0,0,0.3);">27</div>
-</div>
-
-<!-- ==================== SLIDE 28: WHERE TO CONNECT ==================== -->
-<div class="slide-container">
-    <div class="slide-header">Tony's Friends Community | tony@vibery.app</div>
-    
-    <div class="grid-2">
-        <div>
-            <h2 class="mb-30">CONNECT</h2>
-            <p style="font-size: 22px; margin-bottom: 30px;">Nếu muốn xem thêm hành trình...</p>
-            
-            <div class="flex-col" style="gap: 15px;">
-                <div class="neo-box" style="display: flex; align-items: center; gap: 15px; padding: 15px 20px;">
-                    <span style="font-size: 24px;">🌐</span>
-                    <span style="font-size: 18px;">vibery.edu</span>
-                </div>
-                <div class="neo-box rotate-1" style="display: flex; align-items: center; gap: 15px; padding: 15px 20px;">
-                    <span style="font-size: 24px;">📧</span>
-                    <span style="font-size: 18px;">tony@vibery.app</span>
-                </div>
-                <div class="neo-box rotate-neg-1" style="display: flex; align-items: center; gap: 15px; padding: 15px 20px;">
-                    <span style="font-size: 24px;">👥</span>
-                    <span style="font-size: 18px;">Tony's Friends Community</span>
-                </div>
-            </div>
-        </div>
-        
-        <div class="text-center">
-            <img src="https://uploads.aigency.asia/ab6b3ca8-5607-432b-8d33-a96775eac710.jpeg" alt="Tony" class="avatar rotate-2" style="width: 250px; height: 250px;">
-            <p style="font-size: 18px; margin-top: 20px; opacity: 0.7;">Không phải Tony Stark, nhưng cũng ship được 😉</p>
-        </div>
-    </div>
-    
-    <div class="slide-number">28</div>
-</div>
-
-<!-- ==================== SLIDE 29: Q&A ==================== -->
-<div class="slide-container dark-slide">
-    <div class="slide-header">Tony's Friends Community | tony@vibery.app</div>
-    
-    <div class="text-center full-height">
-        <h1 class="mega" style="font-size: 120px;">Q&A</h1>
-        
-        <p style="font-size: 24px; margin-top: 50px; opacity: 0.7;">Hỏi gì cũng được — trừ "thời tiết hôm nay thế nào" 😄</p>
-        
-        <div class="grid-3" style="margin-top: 50px; max-width: 900px; margin-left: auto; margin-right: auto;">
-            <div class="neo-box" style="padding: 15px; text-align: center;">
-                <p style="font-size: 14px; color: black;">"Tech stack nào?"</p>
-            </div>
-            <div class="neo-box" style="padding: 15px; text-align: center; background: var(--accent-yellow);">
-                <p style="font-size: 14px; color: black;">"Balance build vs market?"</p>
-            </div>
-            <div class="neo-box" style="padding: 15px; text-align: center;">
-                <p style="font-size: 14px; color: black;">"Claude Projects limit?"</p>
-            </div>
-        </div>
-    </div>
-    
-    <div class="slide-number">29</div>
-</div>
-
-</body>
-</html>
+            <h3 style="font-size: 28px; margin-bottom: 15px;">ỨNG D�
